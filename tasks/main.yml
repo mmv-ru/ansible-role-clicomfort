@@ -1,0 +1,25 @@
+---
+# tasks file for mmv.clicomfort
+
+- name: CLI tools for comfort and debug
+  package:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - bash-completion
+    - yum-utils
+    - mlocate
+    - tcpdump
+    - setroubleshoot-server
+    - setroubleshoot
+  tags: [comfort, debug, packages]
+
+- include_role:
+    name: mmv-ru.vim
+  tags: [comfort]
+
+- name: update mlocate DB
+  command: updatedb
+  args:
+    creates: /var/lib/mlocate/mlocate.db
+  tags: [comfort]
