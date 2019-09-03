@@ -12,6 +12,7 @@
     - tcpdump
     - setroubleshoot-server
     - setroubleshoot
+    - bind-utils # host nslookup dig
   tags: [comfort, debug, packages]
 
 - include_role:
