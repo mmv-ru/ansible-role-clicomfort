@@ -3,9 +3,7 @@
 
 - name: CLI tools for comfort and debug
   package:
-    name: "{{item}}"
-    state: present
-  with_items:
+    name:
     - bash-completion
     - yum-utils
     - mlocate
@@ -13,6 +11,7 @@
     - setroubleshoot-server
     - setroubleshoot
     - bind-utils # host nslookup dig
+    state: present
   tags: [comfort, debug, packages]
 
 - include_role:
