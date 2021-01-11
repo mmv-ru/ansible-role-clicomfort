@@ -8,16 +8,25 @@
     name:
     - bash-completion
     - yum-utils
-    - mlocate
     - tcpdump
-    - setroubleshoot-server
-    - setroubleshoot
     - bind-utils # host nslookup dig
     state: present
   tags: [comfort, debug, packages]
 
-- name: update mlocate DB
-  command: updatedb
-  args:
-    creates: /var/lib/mlocate/mlocate.db
-  tags: [comfort]
+- name: CLI tools for comfort and debug
+  package:
+    name:
+    - mlocate
+    state: present
+  notify: update mlocate DB
+  tags: [comfort, debug, packages]
+
+- name: selinux CLI tools for comfort and debug
+  package:
+    name:
+    - setroubleshoot-server
+    - setroubleshoot
+    state: present
+  when: ansible_selinux.status != "disabled" and
+        ansible_selinux.config_mode == "enforcing"
+  tags: [comfort, debug, packages, selinux]

@@ -1,2 +1,8 @@
 ---
 # handlers file for mmv.clicomfort
+
+- name: update mlocate DB
+  command: updatedb
+  args:
+    creates: /var/lib/mlocate/mlocate.db
+  tags: [always]
