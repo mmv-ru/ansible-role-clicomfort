@@ -30,3 +30,11 @@
   when: ansible_selinux.status != "disabled" and
         ansible_selinux.config_mode == "enforcing"
   tags: [comfort, debug, packages, selinux]
+
+- name: Disable Ctrl-S Ctrl-Q (software flow control in terminal)
+  copy:
+    content: |
+      # Disable Ctrel-S Ctrl-Q software flow control:
+      stty -ixon
+    dest: /etc/profile.d/flowcontrol.sh
+  tags: [comfort, configure]
