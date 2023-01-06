@@ -27,8 +27,8 @@
     - setroubleshoot-server
     - setroubleshoot
     state: present
-  when: ansible_selinux.status != "disabled" and
-        ansible_selinux.config_mode == "enforcing"
+  when: ansible_selinux.status = "enabled" and
+        ansible_selinux.config_mode|default("permissive") == "enforcing"
   tags: [comfort, debug, packages, selinux]
 
 - name: Disable Ctrl-S Ctrl-Q (software flow control in terminal)
